@@ -1,4 +1,4 @@
- Title Letras maiusculas linha 
+ Title Soma de 5 numeros
 .MODEL SMALL
 .STACK 100H
 .data
