@@ -3,28 +3,23 @@
 .STACK 100H
 .CODE
 MAIN PROC
-              mov  cx, 20
-              mov  dl,97
-              mov  ah,02H
-    criaLoop:
-
-              int  21h
-              inc  dl
-              inc  bl
-              cmp  bl,4
-              je   pulaLinha
-              loop criaLoop
-              cmp  cx,0
-              je   fim
-
-    pulaLinha:
-              mov  bh,dl
-              mov  ah,02H
-              mov  dl,10
-              int  21h
-              mov  dl,bh
-              mov  bl,00
-              jmp  criaLoop
+    mov cx,26
+    mov bl,4
+    mov bh,10
+    mov dl,'a'
+    mov ah,02
+    primeiroloop:
+    int 21H
+    inc dl
+    dec bl
+    jnz salta
+    xchg dl,bh
+    mov ah,02
+    int 21h
+    xchg dl,bh
+    mov bl,4
+    salta:
+    loop primeiroloop
 
 
     fim:      
