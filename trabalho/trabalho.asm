@@ -13,7 +13,7 @@ ENDM
 
 .DATA
   msg1   db "        //BATALHA NAVAL\\    $"
-  msg2   db "Precione Enter para comecar$"
+  msg2   db "Pressione Enter para comecar$"
   msg3   db "Digite o X de 00 a 19 $"
   msg4   db "Digite o y de 00 a 19 $"
 
@@ -67,9 +67,9 @@ main proc
                 call      barco
                 call      imprimeMatriz
 
-  b:            
+   
                 call      tiro
-                jmp       b
+
   fim:          
                 mov       ah,4CH
                 int       21h
@@ -393,6 +393,9 @@ imprimeMatriz endp
 
 
 tiro proc
+                xor       cx,cx
+                push      cx
+  tiroA:        
                 pulaLinha
                 mov       ah,09h
                 lea       dx,msg3
@@ -401,6 +404,7 @@ tiro proc
   ;eixo x
                 mov       ah,01
                 int       21h
+
                 and       al,0fh
                 mov       bh,al
                 mov       ah,01h
@@ -412,7 +416,6 @@ tiro proc
                 add       ax,bx
                 xor       ah,ah
                 mov       si,ax
-
                 pulaLinha
                 mov       ah,09h
                 lea       dx,msg4
@@ -422,6 +425,8 @@ tiro proc
   ;eixo y
                 mov       ah,01
                 int       21h
+                cmp       al,13
+                je        fimT
                 and       al,0fh
                 mov       bh,al
                 mov       ah,01h
@@ -441,33 +446,24 @@ tiro proc
                 cmp       ax,'8'
                 je        acertou
                 mov       matriz[bx][si],'9'
-                jmp       fimA
+                pulaLinha
+                call      imprimeMatriz
+                jmp       tiroA
                 
   acertou:      
                 mov       matriz[bx][si],91h
-  fimA:          
                 pulaLinha
                 call      imprimeMatriz
+                pop       cx
+                inc       cx
+                cmp       cx,19
+                je        fimT
                 
+                jmp       tiroA
+
+  fimT:         
                 ret
 tiro endp
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
