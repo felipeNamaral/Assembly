@@ -19,26 +19,8 @@ ENDM
     msg5   db "Voce ganhou !! fim de jogo $"
     
 
-    matriz db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
-           db 20 dup(0)
+    matriz db 400 dup(0)
+           
 .code
 main proc
                     mov       ax,@DATA
